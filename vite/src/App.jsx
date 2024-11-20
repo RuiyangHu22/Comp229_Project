@@ -75,6 +75,8 @@ function App() {
   
     console.log('Adding book:', newBook); // Log the book data being submitted
   
+
+
     try {
       const response = await fetch(booksEndpoint, {
         method: 'POST',
@@ -99,6 +101,41 @@ function App() {
     }
   };
   
+
+
+  // Edit an existing book
+  const handleEdit = (book) => {
+    setEditBook(book);
+  };
+
+  // Update book
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${database}/${editBook._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editBook),
+      });
+      fetchBooks();
+    } catch (error) {
+      console.error('Failed to update book:', error);
+    }
+  };
+
+
+  // Delete a book
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`${database}/${id}`, {
+        method: 'DELETE',
+      });
+    } catch (error) {
+      console.error('Failed to delete book:', error);
+    }
+  };
 
   // Fetch books when the app loads and user is authenticated
   useEffect(() => {
@@ -194,6 +231,52 @@ function App() {
             <button type="submit">Add Book</button>
           </form>
 
+
+
+          {editBook && (
+        <div>
+          <h2>Edit Book</h2>
+          <form onSubmit={handleUpdate}>
+            <input
+              type="text"
+              value={editBook.title}
+              onChange={(e) => setEditBook({ ...editBook, title: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editBook.description}
+              onChange={(e) => setEditBook({ ...editBook, description: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editBook.genre}
+              onChange={(e) => setEditBook({ ...editBook, genre: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editBook.author}
+              onChange={(e) => setEditBook({ ...editBook, author: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editBook.isbn}
+              onChange={(e) => setEditBook({ ...editBook, isbn: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editBook.status}
+              onChange={(e) => setEditBook({ ...editBook, status: e.target.value })}
+            />
+            <input
+              type="text"
+              value={editBook.category}
+              onChange={(e) => setEditBook({ ...editBook, category: e.target.value })}
+            />
+            <button type="submit">Update Book</button>
+            <button type="button" onClick={() => setEditBook(null)}>Cancel</button>
+          </form>
+        </div>
+      )}
           <h2>Book List</h2>
           <ul>
             {books.map((book) => (
