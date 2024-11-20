@@ -1,58 +1,36 @@
 const express = require('express');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
-
 const router = express.Router();
 
-// Function to generate secure token
-function generateToken() {
-    return crypto.randomBytes(24).toString('hex');
-}
-
-// In-memory store for tokens (you can use Redis or another database for production)
-const tokens = {};
-
-// Register
+// Register a new user
 router.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-
-    try {
-        const user = new User({ username, password });
-        await user.save();
-        res.status(201).json({ message: 'User registered successfully!' });
-    } catch (err) {
-        res.status(400).json({ message: 'Error registering user', error: err.message });
-    }
+  const { username, password } = req.body;
+  try {
+    const user = new User({ username, password });
+    await user.save();
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    res.status(400).json({ message: 'Error registering user', error: err.message });
+  }
 });
 
-// Login
+// Login a user
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+  const { username, password } = req.body;
 
-    try {
-        const user = await User.findOne({ username });
-        if (!user || !user.validatePassword(password)) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
-
-        const token = generateToken();
-        tokens[token] = user._id; // Associate token with user ID
-        res.json({ token });
-    } catch (err) {
-        res.status(500).json({ message: 'Error logging in', error: err.message });
+  try {
+    const user = await User.findOne({ username });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ message: 'Invalid username or password' });
     }
-});
 
-// Logout
-router.post('/logout', (req, res) => {
-    const { token } = req.body;
-
-    if (tokens[token]) {
-        delete tokens[token];
-        res.json({ message: 'Logged out successfully' });
-    } else {
-        res.status(400).json({ message: 'Invalid token' });
-    }
+    const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ message: 'Login successful', token });
+  } catch (err) {
+    res.status(500).json({ message: 'Error logging in', error: err.message });
+  }
 });
 
 module.exports = router;

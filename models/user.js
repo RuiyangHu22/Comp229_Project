@@ -1,29 +1,19 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
+// Define User Schema
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    salt: { type: String, required: true }, // Salt for password hashing
+    password: { type: String, required: true }
 });
 
 // Hash password before saving
-userSchema.pre('save', function(next) {
+userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
-        this.salt = crypto.randomBytes(16).toString('hex'); // Generate a random salt
-        this.password = crypto
-            .pbkdf2Sync(this.password, this.salt, 1000, 64, 'sha512')
-            .toString('hex'); // Hash password
+        this.password = await bcrypt.hash(this.password, 10);
     }
     next();
 });
 
-// Method to validate password
-userSchema.methods.validatePassword = function(password) {
-    const hash = crypto
-        .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
-        .toString('hex');
-    return this.password === hash;
-};
-
+// Export Model
 module.exports = mongoose.model('User', userSchema);
