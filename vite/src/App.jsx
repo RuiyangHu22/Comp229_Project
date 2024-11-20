@@ -112,7 +112,7 @@ function App() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${database}/${editBook._id}`, {
+      const response = await fetch(`${booksEndpoint}/${editBook._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
