@@ -76,7 +76,6 @@ function App() {
     console.log('Adding book:', newBook); // Log the book data being submitted
   
 
-
     try {
       const response = await fetch(booksEndpoint, {
         method: 'POST',
@@ -116,6 +115,7 @@ function App() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Correct Bearer format
         },
         body: JSON.stringify(editBook),
       });
@@ -129,9 +129,14 @@ function App() {
   // Delete a book
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`${database}/${id}`, {
+      const response = await fetch(`${booksEndpoint}/${id}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+
       });
+      fetchBooks();
     } catch (error) {
       console.error('Failed to delete book:', error);
     }
