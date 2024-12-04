@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Book Store</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>The Book Store</h1>
+      <img src="TheCodersLogo.png" alt="Team Logo" class="logo" />
+      <nav id="navbar">
+        <a href="http://localhost:3000">Home</a>
+        <a href="http://localhost:5173">Sign Up</a>
+        <a href="http://localhost:5173" id="signin-link">Sign In</a>
+      </nav>
+    </header>
+
+    <script>
+      import React, { useState, useEffect } from 'react';
+      const [books, setBooks] = useState([]);
+      const [token, setToken] = useState('');
+      // Function to fetch and display books
+      const fetchBooks = async () => {
+          try {
+              const response = await fetch('http://localhost:3000/books', {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include token if authenticated
+                  },
+              });
+              const books = await response.json();
+              
+              // Loop through the books and display them
+              books.forEach(book => {
+                  const bookItem = document.createElement('div');
+                  bookItem.classList.add('book-item');
+                  bookItem.innerHTML = `
+                      <h3>${book.title}</h3>
+                      <p><strong>Author:</strong> ${book.author}</p>
+                      <p><strong>Genre:</strong> ${book.genre}</p>
+                      <p><strong>Status:</strong> ${book.status}</p>
+                      <p><strong>Category:</strong> ${book.category}</p>
+                  `;
+                  bookListContainer.appendChild(bookItem);
+              });
+          } catch (error) {
+              console.error('Error fetching books:', error);
+              document.getElementById('book-list').innerHTML = '<p>Failed to load books. Please try again later.</p>';
+          }
+      };
+
+      // Call the function to fetch books when the page loads
+      fetchBooks();
+  </script>
+  </body>
+</html>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-
 const authEndpoint = 'http://localhost:3000/auth'; // Authentication endpoint
 const booksEndpoint = 'http://localhost:3000/books'; // Books endpoint
 
@@ -156,14 +155,23 @@ function App() {
   }, [isAuthenticated]);
 
   return (
+    
     <div className="App">
-      <h1>Library Management</h1>
-
+          
       {/* Login Form */}
       {!isAuthenticated && (
         <div>
-          <h2>Login</h2>
+        <header>
+          <h1>The Book Store</h1>
+          <img src="TheCodersLogo.png" alt="Team Logo" class="logo" />
+          <nav id="navbar">
+            <a href="http://localhost:3000">Home</a>
+            <a href="http://localhost:5173">Sign Up</a>
+            <a href="http://localhost:5173" id="signin-link">Sign In</a>
+          </nav>
+        </header>
           <form onSubmit={handleLogin}>
+          <h1>Login form</h1>
             <input
               type="text"
               placeholder="Username"
@@ -183,12 +191,19 @@ function App() {
         </div>
       )}
 
-      {/* Logout Button */}
-      {isAuthenticated && <button onClick={handleLogout}>Logout</button>}
 
       {/* Book Management Features */}
       {isAuthenticated && (
         <div>
+        <header>
+          <h1>The Book Store</h1>
+          <img src="TheCodersLogo.png" alt="Team Logo" class="logo" />
+          <nav id="navbar">
+            <a href="http://localhost:3000">Home</a>
+            <a href="">My Profile</a>
+            <a href="" onClick={handleLogout}>Logout</a>
+          </nav>
+        </header>
           <h2>Create Book</h2>
           <form onSubmit={handleCreate}>
             <input
