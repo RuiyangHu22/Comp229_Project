@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/auth');
-const booksRouter = require('./routes/books'); // Import the books route
+const booksRouter = require('./routes/books');
 const authenticateToken = require('./middleware/authenticateToken');
 const path = require('path');
 
@@ -26,8 +26,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     .catch((error) => console.error('Error connecting to MongoDB:', error));
 
 // Routes
-app.use('/auth', authRouter); // Authentication routes
-app.use('/books', authenticateToken, booksRouter); // Protect book routes
+app.use('/auth', authRouter);
+app.use('/books',  booksRouter);
 
 // Base Route
 app.get('/', (req, res) => {

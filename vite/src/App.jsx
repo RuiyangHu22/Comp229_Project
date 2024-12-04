@@ -163,7 +163,6 @@ function App() {
         <div>
         <header>
           <h1>The Book Store</h1>
-          <img src="TheCodersLogo.png" alt="Team Logo" class="logo" />
           <nav id="navbar">
             <a href="http://localhost:3000">Home</a>
             <a href="http://localhost:5173">Sign Up</a>
@@ -197,7 +196,6 @@ function App() {
         <div>
         <header>
           <h1>The Book Store</h1>
-          <img src="TheCodersLogo.png" alt="Team Logo" class="logo" />
           <nav id="navbar">
             <a href="http://localhost:3000">Home</a>
             <a href="">My Profile</a>
