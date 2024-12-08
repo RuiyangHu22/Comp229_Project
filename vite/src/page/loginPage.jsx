@@ -39,7 +39,7 @@ const LoginPage = () => {
       <header>
         <nav id="navbar">
           <h1>The Book Store</h1>
-          <a href="http://localhost:3000">Home</a>
+          <a href="/">Home</a>
           <a href="/register">Sign Up</a>
           <a href="/login">Sign In</a>
         </nav>

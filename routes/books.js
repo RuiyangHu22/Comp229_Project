@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/book');
-const authenticateToken = require('../middleware/authenticateToken'); // Make sure to include the authentication middleware
+const authenticateToken = require('../middleware/authenticateToken');
 
 
 router.get('/', async (req, res) => {

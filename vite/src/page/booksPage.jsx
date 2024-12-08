@@ -109,7 +109,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
       <header>
         <h1>The Book Store</h1>
         <nav id="navbar">
-          <a href="http://localhost:3000">Home</a>
+          <a href="/">Home</a>
           <a href="/books">My Books</a>
           <a href="" onClick={handleLogout}>
             Logout
@@ -117,7 +117,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
         </nav>
       </header>
 
-      <h2>Create Book</h2>
+      <h2>Add Book</h2>
       <form onSubmit={handleCreate}>
         <input
           type="text"
