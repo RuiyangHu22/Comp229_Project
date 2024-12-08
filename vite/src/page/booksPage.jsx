@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   const [books, setBooks] = useState([]);
@@ -8,7 +7,6 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
 
   const booksEndpoint = 'http://localhost:3000/books';
 
-  const navigate = useNavigate();
 
 
   // Fetch all books
@@ -38,8 +36,6 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
     alert('No token found. Please log in.');
     return;
   }
-
-    console.log('New Book Data:', newBook);
     try {
       const response = await fetch(booksEndpoint, {
         method: 'POST',
@@ -114,7 +110,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
         <h1>The Book Store</h1>
         <nav id="navbar">
           <a href="http://localhost:3000">Home</a>
-          <a href="">My Profile</a>
+          <a href="/books">My Books</a>
           <a href="" onClick={handleLogout}>
             Logout
           </a>
