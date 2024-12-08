@@ -3,7 +3,6 @@ import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 import RegistrationPage from './page/registrationPage';
 import LoginPage from './page/loginPage';
 import BooksPage from './page/booksPage';
-import logo from './TheCodersLogo.png';
 import './App.css';
 const booksEndpoint = 'https://comp229-backend-1nco.onrender.com/books';
 
@@ -42,7 +41,7 @@ const HomePage = () => {
     <div>
       <header>
         <h1>The Book Store</h1>
-        <img src={logo} alt="Team Logo" class="logo" />
+        <img src="/TheCodersLogo.png" alt="Team Logo" class="logo" />
         <nav id="navbar">
           <a href="/">Home</a>
           <a href="/register">Sign Up</a>
