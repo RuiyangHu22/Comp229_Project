@@ -5,7 +5,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   const [newBook, setNewBook] = useState({ title: '', description: '', genre: '', author: '', isbn: '', status: '', category: '' });
   const [editBook, setEditBook] = useState(null);
 
-  const booksEndpoint = 'http://localhost:3002/books';
+  const booksEndpoint = 'https://comp229-backend-1nco.onrender.com/books';
 
 
 

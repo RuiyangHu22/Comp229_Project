@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [isAuthenticated, setIsAuthenticated] = useState(false); 
-  const authEndpoint = 'http://localhost:3002/auth';
+  const authEndpoint = 'https://comp229-backend-1nco.onrender.com/auth';
   const navigate = useNavigate();
 
   // Handle login

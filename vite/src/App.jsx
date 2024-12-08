@@ -4,7 +4,7 @@ import RegistrationPage from './page/registrationPage';
 import LoginPage from './page/loginPage';
 import BooksPage from './page/booksPage';
 import './App.css';
-const booksEndpoint = 'http://localhost:3002/books';
+const booksEndpoint = 'https://comp229-backend-1nco.onrender.com/books';
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
