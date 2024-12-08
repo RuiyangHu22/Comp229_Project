@@ -40,24 +40,20 @@ const RegistrationPage = () => {
         </header>
             <h2>Register</h2>
             <form onSubmit={handleRegistration}>
-                <label>
-                    Username:
                     <input
                         type="text"
+                        placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                </label>
-                <label>
-                    Password:
                     <input
                         type="password"
+                        placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                </label>
                 <button type="submit">Register</button>
             </form>
             {message && <p>{message}</p>}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   const [books, setBooks] = useState([]);
@@ -6,6 +7,9 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   const [editBook, setEditBook] = useState(null);
 
   const booksEndpoint = 'http://localhost:3000/books';
+
+  const navigate = useNavigate();
+
 
   // Fetch all books
   const fetchBooks = async () => {
@@ -20,6 +24,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
       console.error('Error fetching books:', error);
     }
   };
+
 
   // Create a new book
   const handleCreate = async (e) => {
@@ -82,6 +87,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
     }
   };
 
+  
   useEffect(() => {
     fetchBooks();
   }, []);
