@@ -60,6 +60,8 @@ router.delete('/:id', getBook, async (req, res) => {
 router.post('/', authenticateToken, async (req, res) => {
   const { title, description, genre, author, isbn, status, category } = req.body;
 
+  console.log('Request Body:', req.body);
+
   // Validation to check if essential fields are provided
   if (!title || !description || !author || !isbn) {
     return res.status(400).json({ message: 'Title, description, author, and ISBN are required' });

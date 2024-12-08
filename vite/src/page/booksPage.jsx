@@ -29,6 +29,17 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   // Create a new book
   const handleCreate = async (e) => {
     e.preventDefault();
+
+
+  const token = localStorage.getItem('token');
+  
+  if (!token) {
+    console.error('No token found. Please log in.');
+    alert('No token found. Please log in.');
+    return;
+  }
+
+    console.log('New Book Data:', newBook);
     try {
       const response = await fetch(booksEndpoint, {
         method: 'POST',
@@ -38,7 +49,12 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
         },
         body: JSON.stringify(newBook),
       });
-      if (!response.ok) throw new Error('Failed to create book');
+      if (!response.ok){
+
+      const errorData = await response.json();
+      console.error('Error Response:', errorData);
+      throw new Error('Failed to create book');
+      }
       await fetchBooks();
       setNewBook({ title: '', description: '', genre: '', author: '', isbn: '', status: '', category: '' });
     } catch (error) {
@@ -87,7 +103,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
     }
   };
 
-  
+
   useEffect(() => {
     fetchBooks();
   }, []);
