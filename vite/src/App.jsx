@@ -3,7 +3,7 @@ import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 import RegistrationPage from './page/registrationPage';
 import LoginPage from './page/loginPage';
 import BooksPage from './page/booksPage';
-import logo from './assets/TheCodersLogo.png';
+import logo from './TheCodersLogo.png';
 import './App.css';
 const booksEndpoint = 'https://comp229-backend-1nco.onrender.com/books';
 
