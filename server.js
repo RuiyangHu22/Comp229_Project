@@ -8,7 +8,7 @@ const authenticateToken = require('./middleware/authenticateToken');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 3002;
 
 
 // Middleware

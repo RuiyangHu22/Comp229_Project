@@ -5,7 +5,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   const [newBook, setNewBook] = useState({ title: '', description: '', genre: '', author: '', isbn: '', status: '', category: '' });
   const [editBook, setEditBook] = useState(null);
 
-  const booksEndpoint = 'http://localhost:10000/books';
+  const booksEndpoint = 'http://localhost:3002/books';
 
 
 
