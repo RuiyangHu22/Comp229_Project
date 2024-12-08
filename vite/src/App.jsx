@@ -8,7 +8,6 @@ const booksEndpoint = 'http://localhost:3000/books';
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
-  const navigate = useNavigate();
 
   // Fetch books
   const fetchBooks = async () => {
