@@ -8,9 +8,9 @@ const authenticateToken = require('./middleware/authenticateToken');
 const path = require('path');
 
 const app = express();
-const port = 'https://comp229-backend-1nco.onrender.com';
+const port = 3000;
 
-
+//'https://comp229-backend-1nco.onrender.com'
 // Middleware
 app.use(cors());
 
