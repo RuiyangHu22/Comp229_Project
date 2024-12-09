@@ -48,13 +48,13 @@ router.put('/:id', getBook, async (req, res) => {
 //Delete by id
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedBook = await Book.findByIdAndDelete(req.params.id); // Use Mongoose's method
+    const deletedBook = await Book.findByIdAndDelete(req.params.id);
     if (!deletedBook) {
       return res.status(404).json({ message: 'Book not found' });
     }
     res.json({ message: 'Book deleted successfully' });
   } catch (err) {
-    console.error('Error deleting book:', err); // Log the error
+    console.error('Error deleting book:', err);
     res.status(500).json({ message: 'Failed to delete book', error: err.message });
   }
 });
