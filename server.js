@@ -30,21 +30,14 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/auth', authRouter);
 app.use('/books',  booksRouter);
 
-app.use(express.static(path.join(__dirname, 'vite', 'dist')));
+app.use(express.static(path.join(__dirname, 'vite')));
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'vite', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'vite', 'index.html'));
 });
 
 
-app.get('*', (req, res) => {
-    const nonApiRoutes = ['/', '/login', '/register', '/books'];
-    if (!nonApiRoutes.some((route) => req.originalUrl.startsWith(route))) {
-        return res.status(404).send('Not found');
-    }
-    res.sendFile(path.join(__dirname, 'vite', 'dist', 'index.html'));
-});
 
 // Start Server
 app.listen(port, () => console.log(`Server started on port ${port}`));
