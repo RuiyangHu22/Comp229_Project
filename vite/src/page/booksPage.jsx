@@ -87,7 +87,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   };
 
   // Delete a book
-  /*const handleDelete = async (id) => {
+  const handleDelete = async (id) => {
     try {
       await fetch(`${booksEndpoint}/${id}`, {
         method: 'DELETE',
@@ -97,8 +97,8 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
     } catch (error) {
       console.error('Failed to delete book:', error);
     }
-  };*/
-
+  };
+/*
   const handleDelete = async (id) => {
     console.log('Attempting to delete book with ID:', id); // Debug log
     console.log('Token:', token); // Check if the token exists and is correct
@@ -121,7 +121,7 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
     } catch (error) {
       console.error('Failed to delete book:', error);
     }
-  };
+  };*/
 
 
   useEffect(() => {
