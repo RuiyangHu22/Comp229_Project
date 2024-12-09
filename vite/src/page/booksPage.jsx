@@ -87,13 +87,37 @@ const BooksPage = ({ token, isAuthenticated, handleLogout }) => {
   };
 
   // Delete a book
-  const handleDelete = async (id) => {
+  /*const handleDelete = async (id) => {
     try {
       await fetch(`${booksEndpoint}/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchBooks();
+    } catch (error) {
+      console.error('Failed to delete book:', error);
+    }
+  };*/
+
+  const handleDelete = async (id) => {
+    console.log('Attempting to delete book with ID:', id); // Debug log
+    console.log('Token:', token); // Check if the token exists and is correct
+  
+    try {
+      const response = await fetch(`${booksEndpoint}/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`, // Ensure token is valid
+        },
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error response from server:', errorData);
+        throw new Error(`Failed to delete book: ${response.statusText}`);
+      }
+  
+      await fetchBooks(); // Refresh book list
     } catch (error) {
       console.error('Failed to delete book:', error);
     }
